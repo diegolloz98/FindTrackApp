@@ -17,21 +17,21 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
     try {
       // query para traer el documento con el id del usuario autenticado
       var queryUser = await FirebaseFirestore.instance
-          .collection("user")
+          .collection("userTracker")
           .doc("${FirebaseAuth.instance.currentUser!.uid}");
 
       // query para sacar la data del documento
       var docsRef = await queryUser.get();
-      var listIds = docsRef.data()?["fotosListId"];
+      var listIds = docsRef.data()?["songListId"];
 
       // query para sacar documentos de fshare
       var queryFotos =
-          await FirebaseFirestore.instance.collection("fshare").get();
+          await FirebaseFirestore.instance.collection("favSongs").get();
 
       // query de Dart filtrando la info utilizando como referencia la lista de ids de docs del usuario actual
       var myDisabledContentList = queryFotos.docs
           .where((doc) =>
-              listIds.contains(doc.id) && doc.data()["public"] == false)
+              listIds.contains(doc.id) && doc.data()["like"] == true)
           .map((doc) => doc.data().cast<String, dynamic>())
           .toList();
 

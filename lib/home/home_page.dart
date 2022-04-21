@@ -5,6 +5,7 @@ import 'package:foto_share/content/agregar/add_form.dart';
 import 'package:foto_share/content/espera/en_espera.dart';
 import 'package:foto_share/content/foru/fotosforu.dart';
 import 'package:foto_share/content/mis_fotos/mis_fotos.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -33,55 +34,76 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(_pagesNameList[_currentPageIndex]),
-          flexibleSpace: Container(
-          height: 120,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Colors.purple, Colors.red]),
-          ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
-              },
-              icon: Icon(Icons.logout),
+      backgroundColor: Colors.black87,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            SizedBox(height: 55),
+            Center(
+              child: Text(
+                "Toque para escuchar",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(height: 180),
+            AvatarGlow(
+              glowColor: Colors.blue,
+              endRadius: 130.0,
+              child: Material(
+                elevation: 8.0,
+                shape: CircleBorder(),
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey[100],
+                  child: Image.asset(
+                    "assets/icon/music-notes.png",
+                    height: 70,
+                  ),
+                  radius: 55,
+                ),
+              ),
+            ),
+            SizedBox(height: 9),
+            Row(
+              mainAxisAlignment: 
+              MainAxisAlignment.spaceEvenly,
+              children: [
+                FloatingActionButton(
+                  heroTag: "btn1",
+                  backgroundColor: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EnEspera()),
+                    );
+                  },
+                  child: Icon(
+                    Icons.favorite,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                ),
+                FloatingActionButton(
+                  heroTag: "btn2",
+                  backgroundColor: Colors.white,
+                  onPressed: () {
+                    BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+                  },
+                  child: Icon(
+                    Icons.logout,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        body: IndexedStack(
-          index: _currentPageIndex,
-          children: _pagesList,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xFF6200EE),
-          currentIndex: _currentPageIndex,
-          onTap: (index) {
-            setState(() {
-              _currentPageIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              label: _pagesNameList[0],
-              icon: Icon(Icons.view_carousel),
-            ),
-            BottomNavigationBarItem(
-              label: _pagesNameList[1],
-              icon: Icon(Icons.query_builder),
-            ),
-            BottomNavigationBarItem(
-              label: _pagesNameList[2],
-              icon: Icon(Icons.photo_camera),
-            ),
-            BottomNavigationBarItem(
-              label: _pagesNameList[3],
-              icon: Icon(Icons.mobile_friendly),
-            ),
-          ],
-        ),
-      );
+      )
+    );
   }
 }

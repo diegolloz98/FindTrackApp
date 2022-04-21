@@ -40,11 +40,11 @@ class   UserAuthRepository{
 
   Future <void>_createUserCollectionFirebase(String uid) async {
     var userDoc = 
-      await FirebaseFirestore.instance.collection("user").doc(uid).get();
+      await FirebaseFirestore.instance.collection("userTracker").doc(uid).get();
     if(!userDoc.exists) {
-      await FirebaseFirestore.instance.collection("user").doc(uid).set(
+      await FirebaseFirestore.instance.collection("userTracker").doc(uid).set(
         {
-          "fotosListId": [],
+          "songListId": [],
         },
       );
     }else{
