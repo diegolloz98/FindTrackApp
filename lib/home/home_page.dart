@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foto_share/auth/bloc/auth_bloc.dart';
 import 'package:foto_share/content/agregar/add_form.dart';
 import 'package:foto_share/content/espera/en_espera.dart';
-import 'package:foto_share/content/foru/fotosforu.dart';
-import 'package:foto_share/content/mis_fotos/mis_fotos.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 
 
@@ -16,21 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentPageIndex = 2;
-  final _pagesNameList = [
-    "Fotos 4U",
-    "En espera",
-    "Agregar",
-    "Mi contenido",
-
-  ];
-  final _pagesList = [
-    FotosForU(),
-    EnEspera(),
-    AddForm(),
-    MisFotos(),
-
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
