@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.grey),
       home: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthErrorState) {
@@ -55,6 +54,7 @@ class MyApp extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         },
       ),
+      theme: ThemeData.dark(),
     );
   }
 }

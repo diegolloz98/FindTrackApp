@@ -4,6 +4,7 @@ import 'package:foto_share/auth/bloc/auth_bloc.dart';
 import 'package:foto_share/content/agregar/add_form.dart';
 import 'package:foto_share/content/espera/en_espera.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:foto_share/content/listaFav/lista.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      //backgroundColor: Colors.black87,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 180),
             AvatarGlow(
-              glowColor: Colors.blue,
+              glowColor: Colors.purple,
               endRadius: 130.0,
               child: Material(
                 elevation: 8.0,
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EnEspera()),
+                    MaterialPageRoute(builder: (context) => ListaFav()),
                     );
                   },
                   child: Icon(
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
                   },
                   child: Icon(
-                    Icons.logout,
+                    Icons.power_settings_new,
                     size: 35,
                     color: Colors.black,
                   ),

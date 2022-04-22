@@ -11,36 +11,38 @@ class EnEspera extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          SizedBox(height: 100),
-          BlocConsumer<PendingBloc, PendingState>(
-          listener: (context, state) {
-            if (state is PendingFotosErrorState) {
-              // show snackbar
-            }
-          },
-          builder: (context, state) {
-            if (state is PendingFotosLoadingState) {
-              return CircularProgressIndicator();
-            } else if (state is PendingFotosEmptyState) {
-              return Center(child: Text("No hay datos por mostrar"));
-            } else if (state is PendingFotosSuccessState) {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.myDisabledData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ItemEspera(nonPublicFData: state.myDisabledData[index]);
-                },
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        )
-      ]
-    )
+      //backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 100),
+            BlocConsumer<PendingBloc, PendingState>(
+            listener: (context, state) {
+              if (state is PendingFotosErrorState) {
+                // show snackbar
+              }
+            },
+            builder: (context, state) {
+              if (state is PendingFotosLoadingState) {
+                return CircularProgressIndicator();
+              } else if (state is PendingFotosEmptyState) {
+                return Center(child: Text("No hay datos por mostrar"));
+              } else if (state is PendingFotosSuccessState) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.myDisabledData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ItemEspera(nonPublicFData: state.myDisabledData[index]);
+                  },
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          )
+        ]
+          ),
+      )
 
     );
   }
