@@ -5,6 +5,7 @@ import 'package:foto_share/content/agregar/add_form.dart';
 import 'package:foto_share/content/espera/en_espera.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:foto_share/content/listaFav/lista.dart';
+import 'package:foto_share/content/songInfo/songInf.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool show = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,20 +36,34 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SizedBox(height: 180),
+            SizedBox(height: 130),
             AvatarGlow(
               glowColor: Colors.purple,
-              endRadius: 130.0,
-              child: Material(
-                elevation: 8.0,
-                shape: CircleBorder(),
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey[100],
-                  child: Image.asset(
-                    "assets/icon/music-notes.png",
-                    height: 70,
+              endRadius: 200.0,
+              animate: show,
+              child: GestureDetector(
+                onTap: () => 
+                setState(() {
+                  show = !show;
+                }),
+                onLongPress: () => 
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SongInf()),
+                  )
+                  ,
+                child: Material(
+                  elevation: 8.0,
+                  shape: CircleBorder(),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.grey[100],
+                    child: Image.asset(
+                      "assets/icon/music-notes.png",
+                      height: 140,
+                      width: 140,
+                    ),
+                    radius: 80,
                   ),
-                  radius: 55,
                 ),
               ),
             ),

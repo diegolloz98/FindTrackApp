@@ -15,6 +15,9 @@ class ItemPublic extends StatefulWidget {
 }
 
 class _ItemPublicState extends State<ItemPublic> {
+  void _launchURL(_url) async {
+  if (!await launch(_url)) throw 'Could not launch $_url';
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,10 +39,38 @@ class _ItemPublicState extends State<ItemPublic> {
                     Positioned(
                       top: 10,
                       left: 10,
-                      child: Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                        size: 30,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Delete from Favorite"),
+                              content: Text(
+                                "The song will be deleted from favorites¿Continue?"),
+                              actions: [
+                                FlatButton(
+                                  child: Text("Continue"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        },
                       ),
                     ),
                     Positioned( 
@@ -53,9 +84,32 @@ class _ItemPublicState extends State<ItemPublic> {
                           ),
                           primary: Colors.blue[300]
                         ),  
-                      onPressed: () async{
-
-                        if (!await launch("${widget.publicFData["song_link"]}")) throw 'Could not launch song link';
+                      onPressed: ()  {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Open Song"),
+                              content: Text(
+                                "You will be redirected to browser¿Continue?"),
+                              actions: [
+                                FlatButton(
+                                  child: Text("Continue"),
+                                  onPressed: () {
+                                    _launchURL("${widget.publicFData["song_link"]}");
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: ListTile(
                         title: new Center(
@@ -68,7 +122,8 @@ class _ItemPublicState extends State<ItemPublic> {
                             "${widget.publicFData["artista"]}"
                           ),
                         ),
-                      )
+                      
+                      ),
                     ),
                     ),
                     
@@ -106,5 +161,6 @@ showAlertDialog(BuildContext context) {
       return alert;
     },
   );
+  
 }
 
