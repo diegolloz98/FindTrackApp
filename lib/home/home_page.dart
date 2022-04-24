@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foto_share/auth/bloc/auth_bloc.dart';
 import 'package:foto_share/content/agregar/add_form.dart';
-import 'package:foto_share/content/espera/en_espera.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:foto_share/content/listaFav/lista.dart';
 import 'package:foto_share/content/songInfo/songInf.dart';

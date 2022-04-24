@@ -18,6 +18,7 @@ class ItemPublic extends StatefulWidget {
 }
 
 class _ItemPublicState extends State<ItemPublic> {
+  
   void _launchURL(_url) async {
   if (!await launch(_url)) throw 'Could not launch $_url';
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:foto_share/content/agregar/bloc/create_bloc.dart';
-import 'package:foto_share/content/espera/bloc/pending_bloc.dart';
 import 'package:foto_share/content/record/record_bloc.dart';
 import 'package:foto_share/home/home_Page.dart';
 import 'package:foto_share/auth/bloc/auth_bloc.dart';
@@ -17,9 +16,6 @@ void main() async {
       providers: [
         BlocProvider(
           create: (context) => AuthBloc()..add(VerifyAuthEvent()),
-        ),
-        BlocProvider(
-          create: (context) => PendingBloc()..add(GetAllMyDisabledFotosEvent()),
         ),
         BlocProvider(
           create: (context) => CreateBloc(),
