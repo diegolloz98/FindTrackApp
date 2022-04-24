@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutterfire_ui/database.dart';
+import 'package:flutterfire_ui/firestore.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -57,7 +60,12 @@ class _ItemPublicState extends State<ItemPublic> {
                                 FlatButton(
                                   child: Text("Continue"),
                                   onPressed: () {
+                                    var collection = FirebaseFirestore.instance.collection('favSongs');
+                                    collection 
+                                        .doc('${widget.publicFData["id"]}') // <-- Doc ID where data should be updated.
+                                        .update({'like': "false"});
                                     Navigator.pop(context);
+                                    
                                   },
                                 ),
                                 FlatButton(
